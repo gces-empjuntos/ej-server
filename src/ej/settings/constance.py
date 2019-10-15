@@ -92,7 +92,11 @@ class ConstanceConf(Conf):
     }
 
     CONSTANCE_CONFIG_FIELDSETS = {
-        "EJ Options": ("EJ_MAX_BOARD_NUMBER", "EJ_PROFILE_STATE_CHOICES", "EJ_USER_HOME_PATH", "EJ_ANONYMOUS_HOME_PATH")
+        "EJ Options": ("EJ_MAX_BOARD_NUMBER", "EJ_PROFILE_STATE_CHOICES", "EJ_USER_HOME_PATH", 
+                       "EJ_ANONYMOUS_HOME_PATH", "EJ_PROFILE_PHOTO",
+                       "EJ_PROFILE_RACE", "EJ_PROFILE_GENDER", "EJ_PROFILE_BIRTH_DATE",
+                       "EJ_PROFILE_OCCUPATION", "EJ_PROFILE_CITY", "EJ_PROFILE_STATE",
+                       "EJ_PROFILE_COUNTRY", "EJ_PROFILE_POLITICAL_ACTIVITY", "EJ_PROFILE_BIOGRAPHY",)
     }
 
     # Auxiliary options
