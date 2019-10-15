@@ -31,6 +31,56 @@ class ConstanceConf(Conf):
                 "Landing page for anonymous user",
                 str,
             ),
+            "EJ_PROFILE_PHOTO": (
+                self.EJ_PROFILE_PHOTO,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_RACE": (
+                self.EJ_PROFILE_RACE,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_GENDER": (
+                self.EJ_PROFILE_GENDER,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_BIRTH_DATE": (
+                self.EJ_PROFILE_BIRTH_DATE,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_OCCUPATION": (
+                self.EJ_PROFILE_OCCUPATION,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_CITY": (
+                self.EJ_PROFILE_CITY,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_STATE": (
+                self.EJ_PROFILE_STATE,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_COUNTRY": (
+                self.EJ_PROFILE_COUNTRY,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_POLITICAL_ACTIVITY": (
+                self.EJ_PROFILE_POLITICAL_ACTIVITY,
+                "Landing page for anonymous user",
+                bool,
+            ),
+            "EJ_PROFILE_BIOGRAPHY": (
+                self.EJ_PROFILE_BIOGRAPHY,
+                "Landing page for anonymous user",
+                bool,
+            ),   
         }
 
     CONSTANCE_ADDITIONAL_FIELDS = {
@@ -48,6 +98,17 @@ class ConstanceConf(Conf):
     # Auxiliary options
     EJ_USER_HOME_PATH = env("/start/", name="{attr}")
     EJ_ANONYMOUS_HOME_PATH = env("/conversations/", name="{attr}")
+
+    EJ_PROFILE_PHOTO = env(True, name="{attr}")
+    EJ_PROFILE_RACE = env(True, name="{attr}")
+    EJ_PROFILE_GENDER = env(True, name="{attr}")
+    EJ_PROFILE_BIRTH_DATE = env(True, name="{attr}")
+    EJ_PROFILE_OCCUPATION = env(True, name="{attr}")
+    EJ_PROFILE_CITY = env(True, name="{attr}")
+    EJ_PROFILE_STATE = env(True, name="{attr}")
+    EJ_PROFILE_COUNTRY = env(True, name="{attr}")
+    EJ_PROFILE_POLITICAL_ACTIVITY = env(True, name="{attr}")
+    EJ_PROFILE_BIOGRAPHY = env(True, name="{attr}")
 
     EJ_MAX_BOARD_NUMBER = env(1, name="{attr}")
     EJ_PROFILE_STATE_CHOICES = env(
