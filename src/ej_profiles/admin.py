@@ -25,7 +25,7 @@ class ProfileAdmin(admin.ModelAdmin):
     
     basic_field_list = []
     if config.EJ_PROFILE_PHOTO:
-        basic_field_list.append("profie_photo")
+        basic_field_list.append("profile_photo")
     if config.EJ_PROFILE_RACE:
         basic_field_list.append("race")
     if config.EJ_PROFILE_GENDER:
