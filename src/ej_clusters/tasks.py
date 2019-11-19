@@ -1,7 +1,5 @@
 import dramatiq
-
 from .models import Clusterization
-
 
 @dramatiq.actor
 def update_clusterization(id):

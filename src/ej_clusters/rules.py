@@ -1,9 +1,7 @@
 import logging
-
 from boogie import rules
 from django.db.models import Count
 from django.utils.timezone import now, timedelta
-
 from ej_conversations.models import Conversation
 from . import models
 from .enums import ClusterStatus
@@ -16,9 +14,7 @@ MINIMUM_NUMBER_OF_CLUSTERS = 2
 COOLDOWN_TIME = timedelta(minutes=5)
 
 
-#
 # Conversation permissions
-#
 @rules.register_rule("ej.must_update_clusterization")
 def must_update_clusterization(obj):
     """
@@ -37,7 +33,8 @@ def must_update_clusterization(obj):
         clusterization is None
         or (
             clusterization.cluster_status == ClusterStatus.PENDING_DATA
-            and not rules.test_rule("ej.can_activate_clusterization", clusterization)
+            and not rules.test_rule("ej.can_activate_clusterization", 
+                                    clusterization)
         )
         or clusterization.n_clusters >= 2
         or clusterization.n_unprocessed_votes < 5
@@ -100,9 +97,7 @@ def can_be_clusterized(user, conversation):
         return False
 
 
-#
 # Auxiliary functions
-#
 def votes_in_conversation(user, conversation):
     """
     Return the number of votes of a user in conversation.

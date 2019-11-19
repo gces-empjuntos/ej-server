@@ -1,9 +1,7 @@
 import contextlib
-
 import sidekick as sk
 from django.db import transaction
 from django.http import Http404
-
 from ej_clusters.math import compute_cluster_affinities
 
 
