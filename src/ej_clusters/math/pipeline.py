@@ -1,12 +1,8 @@
 import sidekick as sk
 from sklearn import pipeline as pipeline_, preprocessing, decomposition
-
 from .kmeans_sklearn import StereotypeKMeans
 
-
-#
 # Default pipeline
-#
 def clusterization_pipeline(whiten=False, distance=None, only_preprocess=False):
     """
     Define the main clusterization pipeline that starts with some vote_table().
@@ -28,9 +24,7 @@ def clusterization_pipeline(whiten=False, distance=None, only_preprocess=False):
     return make_pipeline
 
 
-#
 # Utility methods
-#
 def pipeline(memory=None, **kwargs):
     """
     Helper function to declare pipelines that uses the fact that Python 3.6+
@@ -42,7 +36,6 @@ def pipeline(memory=None, **kwargs):
 identity_transformer = preprocessing.FunctionTransformer(
     sk.identity, sk.identity, validate=True, accept_sparse=True
 )
-
 
 def optional_whitener(enable):
     """

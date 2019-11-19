@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-
 from sidekick import import_later
 from sklearn.decomposition import PCA, KernelPCA
 from sklearn.manifold import TSNE, Isomap, MDS, LocallyLinearEmbedding, SpectralEmbedding
@@ -14,7 +13,6 @@ DEFAULT_ALPHA = 0.5
 def random_clusterization(shape, n_comments, alpha=DEFAULT_ALPHA, missing=0.5):
     """
     Similar to random_cluster, but produces a full clusterization.
-
     First argument is either a list of cluster sizes.
     """
     # Fake data
