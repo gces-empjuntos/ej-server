@@ -1,15 +1,22 @@
 from model_mommy.recipe import Recipe, foreign_key as _foreign_key
 from sidekick import record
-
 from ej_conversations.enums import Choice
 from ej_conversations.mommy_recipes import ConversationRecipes
 from .models import Stereotype, StereotypeVote, Clusterization, Cluster
 
 __all__ = ["ClusterRecipes"]
 
-
 class ClusterRecipes(ConversationRecipes):
-    clusterization = Recipe(Clusterization, conversation=_foreign_key(ConversationRecipes.conversation))
+    """ Receipts to cluster
+        Attributes:
+            clusterization: conversations to cluster
+            cluster: cluster made
+            stereotypes: types of stereotype and author
+            stereotype_vote: informations about vote with author name, comment, choice
+    """
+    clusterization = Recipe(Clusterization, 
+                            conversation=_foreign_key(ConversationRecipes.conversation)
+                     )
     cluster = Recipe(Cluster, clusterization=_foreign_key(clusterization), name="cluster")
     stereotype = Recipe(
         Stereotype,

@@ -1,5 +1,4 @@
 from django.shortcuts import redirect
-
 from boogie.router import Router
 from ej_clusters.forms import StereotypeForm
 from ej_clusters.utils import check_stereotype
@@ -7,7 +6,9 @@ from .models import Stereotype
 
 app_name = "ej_cluster"
 urlpatterns = Router(
-    template="ej_clusters/stereotypes/{name}.jinja2", models={"stereotype": Stereotype}, login=True
+    template="ej_clusters/stereotypes/{name}.jinja2", 
+    models={"stereotype": Stereotype}, 
+    login=True
 )
 
 
