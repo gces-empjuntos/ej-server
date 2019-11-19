@@ -1,5 +1,4 @@
 import random
-
 from django.contrib.auth import get_user_model
 from django.db.models import Avg
 from django.conf import settings
@@ -10,11 +9,9 @@ from ej_conversations.models import Vote
 
 User = get_user_model()
 
-
 def set_clusters_from_comments(conversation, comment_map, exclusive=True, author=None):
     """
     Create clusters and stereotypes from conversation.
-
     Usage:
 
         >>> set_clusters_from_comments(conversation, {
@@ -27,12 +24,14 @@ def set_clusters_from_comments(conversation, comment_map, exclusive=True, author
             ]
         })
     """
+
     author = author or conversation.author
     clusterization = conversation.get_clusterization()
     created_comments = []
     created_stereotypes = []
 
     for cluster_name, comments in comment_map.items():
+        # Verify if is a instace of clusters
         if isinstance(cluster_name, (tuple, list)):
             cluster_name, description = cluster_name
         else:
@@ -62,7 +61,7 @@ def set_clusters_from_comments(conversation, comment_map, exclusive=True, author
 
     return created_comments
 
-
+# Analisys of cluters votes
 def cluster_votes(conversation, users):
     clusterization = conversation.get_clusterization()
     comments = list(conversation.comments.all())
@@ -88,7 +87,6 @@ def cluster_votes(conversation, users):
 
             for user in users:
                 vote = random_vote(prob)
-
                 if vote is not None:
                     vote = comments_map[comment_id].vote(user, vote, commit=False)
                     votes.append(vote)
@@ -108,9 +106,7 @@ def random_vote(prob):
         return Choice.DISAGREE
 
 
-#
 # Examples
-#
 def make_conversation_with_clusters_en():
     conversation = create_conversation(
         "How should our society organize the production of goods and services?",

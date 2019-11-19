@@ -28,9 +28,8 @@ class ClusterizationManagerAdmin(admin.ModelAdmin):
     """ A Clusterization Manager Admin
 
     Attributes:
-        request: request from client
-        queryset: query with data to cluster 
-        force: force cluster
+        inlines
+        actions: actions of users
     """
     inlines = [ClusterInline]
     actions = ["force_clusterization", "update_clusterization"]
