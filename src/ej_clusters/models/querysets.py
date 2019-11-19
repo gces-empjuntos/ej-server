@@ -1,5 +1,4 @@
 from sidekick import import_later
-
 from boogie.models import QuerySet, Manager
 from ej_conversations import Choice
 from ej_conversations.mixins import UserMixin, conversation_filter
@@ -7,7 +6,6 @@ from ej_conversations.models import Conversation, VoteQuerySet, Comment, Comment
 from ..mixins import ClusterizationBaseMixin
 
 models = import_later("..models", package=__package__)
-
 
 class ClusterizationQuerySet(ClusterizationBaseMixin, QuerySet):
     """
@@ -76,9 +74,7 @@ class StereotypeQuerySet(UserMixin, QuerySet):
         return comments
 
 
-#
 # PATCH STANDARD COMMENT QUERYSET
-#
 class CommentQuerySetMixin:
     def stereotype_votes(self):
         """
