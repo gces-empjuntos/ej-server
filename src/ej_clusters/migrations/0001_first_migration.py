@@ -26,26 +26,35 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True, 
+                        primary_key=True, 
+                        serialize=False, 
+                        verbose_name="ID"
                     ),
                 ),
                 (
                     "created",
                     model_utils.fields.AutoCreatedField(
-                        default=django.utils.timezone.now, editable=False, verbose_name="created"
+                        default=django.utils.timezone.now, 
+                        editable=False, 
+                        verbose_name="created"
                     ),
                 ),
                 (
                     "modified",
                     model_utils.fields.AutoLastModifiedField(
-                        default=django.utils.timezone.now, editable=False, verbose_name="modified"
+                        default=django.utils.timezone.now, 
+                                editable=False, 
+                                verbose_name="modified"
                     ),
                 ),
                 ("name", models.CharField(max_length=64, verbose_name="Name")),
                 (
                     "description",
                     models.TextField(
-                        blank=True, help_text="How was this cluster conceived?", verbose_name="Description"
+                        blank=True, 
+                        help_text="How was this cluster conceived?", 
+                        verbose_name="Description"
                     ),
                 ),
             ],
@@ -57,25 +66,33 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True, 
+                        primary_key=True, 
+                        serialize=False, 
+                        verbose_name="ID"
                     ),
                 ),
                 (
                     "created",
                     model_utils.fields.AutoCreatedField(
-                        default=django.utils.timezone.now, editable=False, verbose_name="created"
+                        default=django.utils.timezone.now, 
+                        editable=False, 
+                        verbose_name="created"
                     ),
                 ),
                 (
                     "modified",
                     model_utils.fields.AutoLastModifiedField(
-                        default=django.utils.timezone.now, editable=False, verbose_name="modified"
+                        default=django.utils.timezone.now, 
+                        editable=False, 
+                        verbose_name="modified"
                     ),
                 ),
                 (
                     "cluster_status",
                     boogie.fields.enum_field.EnumField(
-                        ej_clusters.enums.ClusterStatus, default=ej_clusters.enums.ClusterStatus(0)
+                        ej_clusters.enums.ClusterStatus, 
+                        default=ej_clusters.enums.ClusterStatus(0)
                     ),
                 ),
                 ("unprocessed_votes", models.PositiveSmallIntegerField(default=0, editable=False)),
@@ -97,7 +114,10 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True, 
+                        primary_key=True, 
+                        serialize=False, 
+                        verbose_name="ID"
                     ),
                 ),
                 ("name", models.CharField(max_length=64, verbose_name="Name")),
@@ -105,7 +125,9 @@ class Migration(migrations.Migration):
                     "description",
                     models.TextField(
                         blank=True,
-                        help_text="A detailed description of your stereotype for future reference. You can specify a background history, or give hints on the exact profile the stereotype wants to capture.",
+                        help_text="A detailed description of your stereotype for future reference. 
+                                   You can specify a background history, 
+                                   or give hints on the exact profile the stereotype wants to capture.",
                         verbose_name="Description",
                     ),
                 ),
@@ -123,7 +145,8 @@ class Migration(migrations.Migration):
                 (
                     "owner",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+                        on_delete=django.db.models.deletion.CASCADE, 
+                        to=settings.AUTH_USER_MODEL
                     ),
                 ),
             ],
@@ -134,7 +157,10 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                        auto_created=True, 
+                        primary_key=True, 
+                        serialize=False, 
+                        verbose_name="ID"
                     ),
                 ),
                 ("choice", boogie.fields.enum_field.EnumField(ej_conversations.models.vote.Choice)),
@@ -173,7 +199,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="cluster",
             name="users",
-            field=models.ManyToManyField(blank=True, related_name="clusters", to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(blank=True, 
+                                            related_name="clusters", 
+                                            to=settings.AUTH_USER_MODEL),
         ),
-        migrations.AlterUniqueTogether(name="stereotype", unique_together={("name", "conversation")}),
+        migrations.AlterUniqueTogether(name="stereotype", 
+                                        unique_together={("name", "conversation")}),
     ]

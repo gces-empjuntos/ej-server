@@ -41,7 +41,9 @@ class Migration(migrations.Migration):
             name="description",
             field=models.TextField(
                 blank=True,
-                help_text="Specify a background history, or give hints about the profile this persona wants to capture. This information is optional and is not made public.",
+                help_text="Specify a background history, 
+                           or give hints about the profile this persona wants to capture. 
+                           This information is optional and is not made public.",
                 verbose_name="Description",
             ),
         ),
