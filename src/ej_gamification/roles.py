@@ -18,7 +18,7 @@ LEVEL_TYPES = (
 # Generic roles
 #
 @with_template(LEVEL_TYPES, role="stars")
-def level_stars(level, request=None, brackets=None):
+def load_level_stars(level, request=None, brackets=None):
     if brackets:
         lbrack, rbrack = brackets
     else:
@@ -33,12 +33,12 @@ def level_stars(level, request=None, brackets=None):
 
 
 @with_template(LEVEL_TYPES, role="description")
-def level_description(level, progress=None, **kwargs):
+def load_level_description(level, progress=None, **kwargs):
     return {"level": level, "progress": progress, **kwargs}
 
 
 @with_template(LEVEL_TYPES, role="trophy-image")
-def level_trophy_image(level, **kwargs):
+def load_level_trophy_image(level, **kwargs):
     cls = type(level)
     return {"level": level, "img_src": TROPHY_IMG_SRC[cls], "name": TROPHY_NAMES.get(cls, _("Score"))}
 
@@ -47,14 +47,14 @@ def level_trophy_image(level, **kwargs):
 # Participation progress trophies
 #
 @with_template(ParticipationProgress, role="statistics")
-def participation_progress_statistics(progress, *, classes="margin-y2", **kwargs):
+def load_participation_progress_statistics(progress, *, classes="margin-y2", **kwargs):
     if isinstance(classes, (tuple, list)):
         classes = " ".join(classes)
     return {"progress": progress, "classes": classes or ""}
 
 
 @with_template([ConversationProgress, UserProgress], role="statistics")
-def user_progress_statistics(progress, *, level, classes="margin-y2", **kwargs):
+def load_user_progress_statistics(progress, *, level, classes="margin-y2", **kwargs):
     if isinstance(classes, (tuple, list)):
         classes = " ".join(classes)
     return {"progress": progress, "classes": classes or "", "kind": LEVEL_KIND[type(level)], "level": level}

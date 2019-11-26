@@ -6,10 +6,8 @@ from ej_clusters.math.kmeans import euclidean_distance as distance
 np = import_later("numpy")
 
 
-def opinion_bridge_index(df, labels):
-    """
-    Compute the opinion bridge index for each user.
-    """
+def compute_opinion_bridge_index(df, labels):
+    
     labels = np.asarray(labels)
     label_set = sorted(np.unique(labels))
     k = len(label_set)
@@ -29,5 +27,5 @@ def opinion_bridge_index(df, labels):
     return distances.min(axis=1)
 
 
-def max_opinion_bridge(size, k):
+def compute_max_opinion_bridge(size, k):
     return int(min(max(1, 0.05 * size)), k)
