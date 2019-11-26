@@ -5,6 +5,22 @@ from ej_clusters.math.kmeans import euclidean_distance as distance
 
 np = import_later("numpy")
 
+def calculate_centroids(data, labels):
+   
+    centroid_array = np.array()
+   
+    for label in label_set:
+        centroid_array.append(np.mean(data[labels == label], 0))
+   
+   return centroid_array
+
+
+def calculate_distances(distances, label_set, labels, centroid_index, data_index):
+    if label_set[centroid_index] == labels[data_index]:
+        distances[data_index, centroid_index] = float("inf")
+    else:
+        distances[data_index, centroid_index] = distance(sample, centroid)
+
 
 def compute_opinion_bridge_index(df, labels):
     
@@ -15,15 +31,13 @@ def compute_opinion_bridge_index(df, labels):
 
     data = Imputer().fit_transform(df)
 
-    centroids = np.array([np.mean(data[labels == label], 0) for label in label_set])
+    centroids = calculate_centroids(data,labels)
 
     distances = np.empty([n_samples, k])
+
     for i, sample in enumerate(data):
         for j, centroid in enumerate(centroids):
-            if label_set[j] == labels[i]:
-                distances[i, j] = float("inf")
-            else:
-                distances[i, j] = distance(sample, centroid)
+            calculate_distances(distances, label_set, labels, j, i)
     return distances.min(axis=1)
 
 
