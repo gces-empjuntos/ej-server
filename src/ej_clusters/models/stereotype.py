@@ -1,17 +1,14 @@
 from logging import getLogger
-
 from boogie import models
 from boogie.rest import rest_api
 from django.conf import settings
 from django.db.models import OuterRef, Subquery
 from django.utils.translation import ugettext_lazy as _
-
 from ej_conversations.enums import Choice
 from .querysets import StereotypeQuerySet
 from .stereotype_vote import StereotypeVote
 
 log = getLogger("ej")
-
 
 @rest_api(["name", "description", "owner"], inline=True)
 class Stereotype(models.Model):
@@ -19,15 +16,20 @@ class Stereotype(models.Model):
     A "fake" user created to help with classification.
     """
 
-    name = models.CharField(_("Name"), max_length=64, help_text=_("Public identification of persona."))
+    name = models.CharField(_("Name"), 
+           max_length=64, 
+           help_text=_("Public identification of persona."))
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name="stereotypes", on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL, 
+        related_name="stereotypes", 
+        on_delete=models.CASCADE
     )
     description = models.TextField(
         _("Description"),
         blank=True,
         help_text=_(
-            "Specify a background history, or give hints about the profile this persona wants to "
+            "Specify a background history, "
+            "or give hints about the profile this persona wants to "
             "capture. This information is optional and is not made public."
         ),
     )
@@ -64,7 +66,8 @@ class Stereotype(models.Model):
         """
         Return a queryset with all comments that did not receive votes.
         """
-        voted = StereotypeVote.objects.filter(author=self, comment__conversation=conversation)
+        voted = StereotypeVote.objects.filter(author=self, 
+                                                comment__conversation=conversation)
         comment_ids = voted.values_list("comment", flat=True)
         return conversation.comments.exclude(id__in=comment_ids)
 

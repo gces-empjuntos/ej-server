@@ -5,6 +5,8 @@ from ej_clusters.mommy_recipes import ClusterRecipes
 
 
 class TestStereotypeForm(ClusterRecipes):
+    """ Test forms to stereotypes
+    """
     def test_valid_data(self, user_db):
         form = StereotypeForm({"name": "Stereotype", "description": "description"}, owner=user_db)
         assert form.is_valid()

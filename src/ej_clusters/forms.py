@@ -1,6 +1,5 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-
 from ej.forms import EjModelForm
 from .models import Stereotype, Cluster
 
@@ -11,9 +10,15 @@ class StereotypeForm(EjModelForm):
     """
 
     class Meta:
-        # We have to add the owner attribute to enable the unique owner + name
-        # validation constraint. This is not ideal since we have to fake the
-        # existence of this field using default values
+        """ We have to add the owner attribute to enable the unique owner + name
+            validation constraint. This is not ideal since we have to fake the
+            existence of this field using default values
+
+            Attributes:
+                model
+                fields
+        """
+
         model = Stereotype
         fields = ["name", "description", "owner"]
 
@@ -35,6 +40,13 @@ class ClusterForm(EjModelForm):
     """
 
     class Meta:
+        """ Form clusters
+            Attributes:
+                model: what cluster
+                fields: what fields name, description or stereotypes
+                help_texts: what choice
+                labels: label types
+        """
         model = Cluster
         fields = ["name", "description", "stereotypes"]
         help_texts = {
@@ -60,7 +72,9 @@ class ClusterFormNew(ClusterForm):
 
     def clean(self):
         if not self.cleaned_data["new_persona"] and not self.cleaned_data["stereotypes"]:
-            self.add_error("stereotypes", _("You must select a persona or create a new one."))
+            self.add_error( "stereotypes", 
+                            _("You must select a persona or create a new one.")
+            )
 
     def _save_m2m(self):
         super()._save_m2m()
@@ -68,6 +82,8 @@ class ClusterFormNew(ClusterForm):
         if self.cleaned_data["new_persona"] and not has_stereotypes:
             owner = self.instance.clusterization.conversation.author
             stereotype, _ = Stereotype.objects.get_or_create(
-                name=self.cleaned_data["name"], description=self.cleaned_data["description"], owner=owner
+                name=self.cleaned_data["name"], 
+                description=self.cleaned_data["description"], 
+                owner=owner
             )
             self.instance.stereotypes.add(stereotype)

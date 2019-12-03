@@ -1,6 +1,5 @@
 from sklearn.cluster import KMeans
 from sklearn.utils.validation import check_is_fitted
-
 from .kmeans import (
     normalize_distance,
     normalize_aggregator,
@@ -10,7 +9,6 @@ from .kmeans import (
     compute_distance_matrix,
     vq,
 )
-
 
 class StereotypeKMeans(KMeans):
     """
@@ -54,7 +52,9 @@ class StereotypeKMeans(KMeans):
         data = X[: -self.n_clusters]
         stereotypes = X[-self.n_clusters :]
         labels, centroids = kmeans_stereotypes(data, stereotypes, **self._args)
-        stereotype_labels = compute_labels(stereotypes, centroids, distance=self.distance)
+        stereotype_labels = compute_labels(stereotypes, 
+                                           centroids, 
+                                           distance=self.distance)
         self.labels_ = np.hstack([labels, stereotype_labels])  # noqa: N803
         self.cluster_centers_ = centroids  # noqa: N803
         return self
@@ -109,4 +109,6 @@ class StereotypeKMeans(KMeans):
         X = self._check_test_data(X)  # noqa: N806
         labels = self.predict(X)
         transform = (lambda x: x * x) if squared else (lambda x: x)
-        return -vq(X, labels, self.cluster_centers_, distance=self.distance, transform=transform)
+        return -vq(X, labels, self.cluster_centers_, 
+                    distance=self.distance, 
+                    transform=transform)

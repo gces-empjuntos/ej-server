@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-
 from ej_conversations.admin import descr
 from . import models
 
+
+"""
+This code is resposible for start and update the Clusters
+"""
 
 class StereotypeVoteInline(admin.TabularInline):
     model = models.StereotypeVote
@@ -22,6 +25,12 @@ class ClusterInline(admin.StackedInline):
 
 @admin.register(models.Clusterization)
 class ClusterizationManagerAdmin(admin.ModelAdmin):
+    """ A Clusterization Manager Admin
+
+    Attributes:
+        inlines
+        actions: actions of users
+    """
     inlines = [ClusterInline]
     actions = ["force_clusterization", "update_clusterization"]
 

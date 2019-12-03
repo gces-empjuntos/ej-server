@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
 from hyperpython import html
-
 from ej.roles import extra_content
 from ej_conversations import models
 

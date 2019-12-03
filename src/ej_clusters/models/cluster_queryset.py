@@ -1,9 +1,7 @@
 from logging import getLogger
-
 from boogie.models import QuerySet, F, Manager, Value, IntegerField
 from django.contrib.auth import get_user_model
 from sidekick import import_later
-
 from ej_conversations.math import imputation
 from ej_conversations.models import Conversation, Comment
 from ..mixins import ClusterizationBaseMixin

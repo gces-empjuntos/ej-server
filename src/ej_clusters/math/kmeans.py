@@ -1,3 +1,6 @@
+import random
+from sidekick import import_later
+
 """
 K-means clustering.
 
@@ -5,12 +8,8 @@ This module has no dependency on EJ and will stay here for a while.
 Once the API stabilizes, it will be implemented in Cython and will move to an
 external package.
 """
-import random
-
-from sidekick import import_later
 
 np = import_later("numpy")
-
 
 def kmeans(data, k, n_runs=10, **kwargs):
     """
@@ -197,10 +196,7 @@ def compute_centroids(data, labels, k, aggregator=None):
 
     return np.array([aggregator(data[labels == k_]) for k_ in range(k)])
 
-
-#
 # Distance functions
-#
 # TODO: convert to functions at sklearn.metrics
 def euclidean_distance(x, y):
     """
@@ -278,16 +274,12 @@ def vq(data, labels, centroids, distance=None, transform=(lambda x: x * x)):
         for k, centroid in enumerate(centroids)
     )
 
-
-#
 # Aggregation functions
-#
 def mean_aggregator(data):
     """
     Return the mean value of a cluster.
     """
     return data.mean(axis=0)
-
 
 def normalize_aggregator(value):
     if callable(value):

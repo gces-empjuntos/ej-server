@@ -2,7 +2,6 @@ from boogie import models
 from boogie.fields import EnumField
 from django.utils.translation import ugettext_lazy as _
 from sidekick import alias
-
 from ej_conversations.enums import Choice
 from .querysets import StereotypeVoteQuerySet
 
@@ -14,7 +13,9 @@ class StereotypeVote(models.Model):
     It forms a m2m relationship between Stereotypes and comments.
     """
 
-    author = models.ForeignKey("Stereotype", related_name="votes", on_delete=models.CASCADE)
+    author = models.ForeignKey("Stereotype", 
+                                related_name="votes", 
+                                on_delete=models.CASCADE)
     comment = models.ForeignKey(
         "ej_conversations.Comment",
         verbose_name=_("Comment"),

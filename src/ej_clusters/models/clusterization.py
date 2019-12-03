@@ -1,11 +1,9 @@
 from logging import getLogger
-
 from boogie import models, rules
 from boogie.fields import EnumField
 from boogie.rest import rest_api
 from model_utils.models import TimeStampedModel
 from sidekick import delegate_to, lazy, placeholder as this
-
 from .querysets import ClusterizationManager
 from .stereotype import Stereotype
 from .stereotype_vote import StereotypeVote
@@ -23,7 +21,9 @@ class Clusterization(TimeStampedModel):
     """
 
     conversation = models.OneToOneField(
-        "ej_conversations.Conversation", on_delete=models.CASCADE, related_name="clusterization"
+        "ej_conversations.Conversation", 
+        on_delete=models.CASCADE, 
+        related_name="clusterization"
     )
     cluster_status = EnumField(ClusterStatus, default=ClusterStatus.PENDING_DATA)
     comments = delegate_to("conversation")
@@ -43,9 +43,7 @@ class Clusterization(TimeStampedModel):
     def n_unprocessed_votes(self):
         return self.conversation.votes(created__gte=self.modified).count()
 
-    #
     # Statistics and annotated values
-    #
     n_clusters = lazy(this.clusters.count())
     n_stereotypes = lazy(this.stereotypes.count())
     n_stereotype_votes = lazy(this.stereotype_votes.count())

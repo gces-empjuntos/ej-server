@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 from sidekick import delegate_to, lazy, import_later, placeholder as this
-
 from ej_conversations.models import Comment
 from .cluster_queryset import ClusterManager
 from .stereotype_vote import StereotypeVote
@@ -14,9 +13,9 @@ from .stereotype_vote import StereotypeVote
 pd = import_later("pandas")
 np = import_later("numpy")
 clusterization_pipeline = import_later("..math:clusterization_pipeline", package=__package__)
+informations_cluster = ["clusterization", "name", "description"]
 
-
-@rest_api(["clusterization", "name", "description"], inline=True)
+@rest_api(informations_cluster, inline=True)
 class Cluster(TimeStampedModel):
     """
     Represents an opinion group.
@@ -48,7 +47,9 @@ class Cluster(TimeStampedModel):
 
     def __str__(self):
         msg = _('{name} ("{conversation}" conversation, {n} users)')
-        return msg.format(name=self.name, conversation=self.conversation, n=self.users.count())
+        return msg.format(name=self.name, 
+                            conversation=self.conversation, 
+                            n=self.users.count())
 
     def get_absolute_url(self):
         args = {"conversation": self.conversation, "cluster": self}
@@ -59,8 +60,9 @@ class Cluster(TimeStampedModel):
         Return the mean stereotype for cluster.
         """
         stereotypes = self.stereotypes.all()
-        votes = StereotypeVote.objects.filter(author__in=Subquery(stereotypes.values("id"))).values_list(
-            "comment", "choice"
+        votes = StereotypeVote.objects.filter(
+                author__in=Subquery(stereotypes.values("id"))).values_list(
+                    "comment", "choice"
         )
         df = pd.DataFrame(list(votes), columns=["comment", "choice"])
         if len(df) == 0:

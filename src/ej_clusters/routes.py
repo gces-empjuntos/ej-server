@@ -1,6 +1,5 @@
 import json
 from logging import getLogger
-
 from boogie.models import F
 from boogie.router import Router
 from django.db.models import Count
@@ -8,7 +7,6 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _, ugettext as __
 from hyperpython import a
 from hyperpython.components import fa_icon
-
 from ej_conversations.enums import Choice
 from ej_conversations.models import Conversation, Comment
 from ej_conversations.routes import conversation_url, check_promoted
@@ -22,14 +20,14 @@ app_name = "ej_cluster"
 urlpatterns = Router(
     template="ej_clusters/{name}.jinja2",
     login=True,
-    models={"conversation": Conversation, "stereotype": Stereotype, "cluster": Cluster},
+    models={"conversation": Conversation, 
+            "stereotype": Stereotype, 
+            "cluster": Cluster},
 )
 stereotype_perms = {"perms": ["ej.can_manage_stereotypes:conversation"]}
 
 
-#
 # Cluster visualization
-#
 @urlpatterns.route(conversation_url + "clusters/")
 def index(request, conversation, slug, check=check_promoted):
     check(conversation, request)

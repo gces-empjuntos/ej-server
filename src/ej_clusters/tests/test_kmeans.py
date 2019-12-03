@@ -1,12 +1,12 @@
 import pytest
 from numpy.testing import assert_almost_equal, assert_equal
 from sidekick import import_later
-
 from ej_clusters.math import kmeans
 
 np = import_later("numpy")
 
 # A very easy dataset with k=2
+# where k is the number of neighbors
 STEREOTYPES = np.array([[1, 1, 1], [-1, -1, -1]], dtype=float)
 DATA = np.array([[1, 0, 1], [1, 1, 1], [0, 1, 1], [-1, 0, -1], [-1, -1, 0], [-1, -1, -1]], dtype=float)
 
